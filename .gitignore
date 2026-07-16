@@ -1,0 +1,36 @@
+# ── Python version (excluded entirely) ──────────────────────────────────────
+python/
+
+# ── .NET build artifacts ─────────────────────────────────────────────────────
+**/bin/
+**/obj/
+
+# ── Publish output ────────────────────────────────────────────────────────────
+publish/
+
+# ── User-specific Visual Studio / Rider files ────────────────────────────────
+.vs/
+*.user
+*.suo
+*.userprefs
+*.userosscache
+*.sln.docstates
+.idea/
+*.DotSettings.user
+
+# ── Shared files folder (runtime data, not source) ───────────────────────────
+SharedFiles/
+**/SharedFiles/
+
+# ── OS junk ──────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Logs ─────────────────────────────────────────────────────────────────────
+*.log
+
+# ── NuGet ────────────────────────────────────────────────────────────────────
+*.nupkg
+.nuget/
+packages/

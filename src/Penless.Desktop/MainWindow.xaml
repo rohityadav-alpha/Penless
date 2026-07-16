@@ -1,0 +1,261 @@
+<Window x:Class="Penless.Desktop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Penless — Local File Transfer"
+        Icon="pack://application:,,,/app.ico"
+        Width="580" Height="720"
+        MinWidth="480" MinHeight="580"
+        WindowStartupLocation="CenterScreen"
+        Background="#C0C0C0"
+        FontFamily="Tahoma, Arial"
+        FontSize="11"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing">
+
+    <Window.Resources>
+
+        <!-- ═══ Win98 Panel (raised box) ═══ -->
+        <Style x:Key="CardBorder" TargetType="Border">
+            <Setter Property="Background"      Value="#C0C0C0" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="Padding"         Value="10,8" />
+            <Setter Property="Margin"          Value="0,0,0,8" />
+        </Style>
+
+        <!-- Win98 group title -->
+        <Style x:Key="SectionTitle" TargetType="TextBlock">
+            <Setter Property="Foreground"  Value="#000000" />
+            <Setter Property="FontSize"    Value="11" />
+            <Setter Property="FontWeight"  Value="Bold" />
+            <Setter Property="Margin"      Value="0,0,0,6" />
+        </Style>
+
+        <!-- Field label -->
+        <Style x:Key="InfoLabel" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#000000" />
+            <Setter Property="FontSize"   Value="11" />
+            <Setter Property="Margin"     Value="0,0,0,2" />
+        </Style>
+
+        <!-- Field value -->
+        <Style x:Key="InfoValue" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#000080" />
+            <Setter Property="FontSize"   Value="11" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Margin"     Value="0,0,0,6" />
+        </Style>
+
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- ═══ Win98 Title Bar ═══ -->
+        <Border Grid.Row="0">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                    <GradientStop Color="#000080" Offset="0"/>
+                    <GradientStop Color="#1084D0" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <DockPanel Margin="4,3,4,3">
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                    <!-- Win98 caption buttons -->
+                    <Border Width="18" Height="15" Margin="2,0,0,0"
+                            Background="#C0C0C0"
+                            BorderBrush="#808080" BorderThickness="1">
+                        <TextBlock Text="?" FontSize="9" FontWeight="Bold"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   Foreground="#000000"/>
+                    </Border>
+                    <Border Width="18" Height="15" Margin="2,0,0,0"
+                            Background="#C0C0C0"
+                            BorderBrush="#808080" BorderThickness="1">
+                        <TextBlock Text="✕" FontSize="9" FontWeight="Bold"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   Foreground="#000000"/>
+                    </Border>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="📡" FontSize="14" Foreground="White"
+                               VerticalAlignment="Center" Margin="0,0,6,0"/>
+                    <TextBlock Text="Penless — Local File Transfer"
+                               Foreground="White" FontWeight="Bold" FontSize="11"
+                               VerticalAlignment="Center"/>
+                </StackPanel>
+            </DockPanel>
+        </Border>
+
+        <!-- ═══ Content ═══ -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto"
+                      Background="#C0C0C0" Padding="8,8,8,4">
+            <StackPanel>
+
+                <!-- ─── Server Status ─── -->
+                <Border Margin="0,0,0,8">
+                    <Border.BorderBrush>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#FFFFFF" Offset="0"/>
+                            <GradientStop Color="#808080" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.BorderBrush>
+                    <Border BorderBrush="#404040" BorderThickness="1"
+                            Background="#C0C0C0" Padding="10,8">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource SectionTitle}"
+                                       Text="Server Status"/>
+                            <Rectangle Height="1" Fill="#808080" Margin="0,0,0,8"/>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                                <Ellipse x:Name="StatusDot" Width="10" Height="10"
+                                         Fill="#800000"
+                                         VerticalAlignment="Center" Margin="0,0,6,0"/>
+                                <TextBlock x:Name="StatusText" Text="Stopped"
+                                           FontWeight="Bold" FontSize="11"
+                                           VerticalAlignment="Center"/>
+                            </StackPanel>
+
+                            <TextBlock Style="{StaticResource InfoLabel}" Text="Local URL:"/>
+                            <TextBlock x:Name="UrlText" Style="{StaticResource InfoValue}"
+                                       Text="—" Cursor="Hand"
+                                       MouseLeftButtonUp="UrlText_Click"
+                                       TextDecorations="Underline"/>
+
+                            <TextBlock Style="{StaticResource InfoLabel}" Text="Local IP:"/>
+                            <TextBlock x:Name="IpText" Style="{StaticResource InfoValue}" Text="—"/>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                                <Button x:Name="StartButton" Content="Start Server"
+                                        Style="{StaticResource ModernButton}"
+                                        Click="StartButton_Click" Margin="0,0,6,0"/>
+                                <Button x:Name="StopButton" Content="Stop Server"
+                                        Style="{StaticResource DangerButton}"
+                                        Click="StopButton_Click" IsEnabled="False"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </Border>
+
+                <!-- ─── QR Code ─── -->
+                <Border x:Name="QrCard" Visibility="Collapsed" Margin="0,0,0,8">
+                    <Border.BorderBrush>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#FFFFFF" Offset="0"/>
+                            <GradientStop Color="#808080" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.BorderBrush>
+                    <Border BorderBrush="#404040" BorderThickness="1"
+                            Background="#C0C0C0" Padding="10,8">
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Style="{StaticResource SectionTitle}"
+                                       Text="Scan to Connect (QR Code)"
+                                       HorizontalAlignment="Center"/>
+                            <Rectangle Height="1" Fill="#808080" Margin="0,0,0,8"/>
+                            <Border Background="White" BorderBrush="#808080"
+                                    BorderThickness="2" Padding="8"
+                                    HorizontalAlignment="Center">
+                                <Image x:Name="QrImage" Width="150" Height="150"
+                                       RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+                            </Border>
+                            <TextBlock x:Name="QrUrlText" Text=""
+                                       FontSize="10" HorizontalAlignment="Center"
+                                       Margin="0,6,0,0" Foreground="#000080"/>
+                        </StackPanel>
+                    </Border>
+                </Border>
+
+                <!-- ─── Configuration ─── -->
+                <Border Margin="0,0,0,8">
+                    <Border.BorderBrush>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#FFFFFF" Offset="0"/>
+                            <GradientStop Color="#808080" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.BorderBrush>
+                    <Border BorderBrush="#404040" BorderThickness="1"
+                            Background="#C0C0C0" Padding="10,8">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource SectionTitle}" Text="Configuration"/>
+                            <Rectangle Height="1" Fill="#808080" Margin="0,0,0,8"/>
+
+                            <TextBlock Style="{StaticResource InfoLabel}" Text="Shared Folder:"/>
+                            <DockPanel Margin="0,0,0,8">
+                                <Button DockPanel.Dock="Right" Content="Browse..."
+                                        Style="{StaticResource SecondaryButton}"
+                                        Click="BrowseFolder_Click" Margin="6,0,0,0"/>
+                                <TextBox x:Name="FolderPathBox" Style="{StaticResource ModernTextBox}"
+                                         Text="SharedFiles"/>
+                            </DockPanel>
+
+                            <TextBlock Style="{StaticResource InfoLabel}" Text="Port:"/>
+                            <TextBox x:Name="PortBox" Style="{StaticResource ModernTextBox}"
+                                     Text="8080" Width="80" HorizontalAlignment="Left"
+                                     Margin="0,0,0,8"/>
+
+                            <TextBlock Style="{StaticResource InfoLabel}"
+                                       Text="PIN (leave empty for open access):"/>
+                            <PasswordBox x:Name="PinBox" Style="{StaticResource ModernPasswordBox}"
+                                         Width="120" HorizontalAlignment="Left" MaxLength="10"/>
+                        </StackPanel>
+                    </Border>
+                </Border>
+
+                <!-- ─── Activity Log ─── -->
+                <Border Margin="0,0,0,0">
+                    <Border.BorderBrush>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#FFFFFF" Offset="0"/>
+                            <GradientStop Color="#808080" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.BorderBrush>
+                    <Border BorderBrush="#404040" BorderThickness="1"
+                            Background="#C0C0C0" Padding="10,8">
+                        <StackPanel>
+                            <DockPanel Margin="0,0,0,4">
+                                <Button DockPanel.Dock="Right" Content="Clear"
+                                        Style="{StaticResource SecondaryButton}"
+                                        Click="ClearLogs_Click"/>
+                                <TextBlock Style="{StaticResource SectionTitle}"
+                                           Text="Activity Log" Margin="0"/>
+                            </DockPanel>
+                            <Rectangle Height="1" Fill="#808080" Margin="0,0,0,6"/>
+
+                            <!-- Sunken white log area -->
+                            <Border BorderBrush="#808080" BorderThickness="2"
+                                    Background="#FFFFFF" MaxHeight="160" Padding="2">
+                                <ScrollViewer x:Name="LogScrollViewer"
+                                              VerticalScrollBarVisibility="Auto"
+                                              Background="#FFFFFF" Padding="3">
+                                    <TextBlock x:Name="LogText"
+                                               Foreground="#000000"
+                                               FontFamily="Courier New"
+                                               FontSize="10" TextWrapping="Wrap"
+                                               Text="Waiting for server to start..."/>
+                                </ScrollViewer>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+                </Border>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- ═══ Status Bar ═══ -->
+        <Border Grid.Row="2" Background="#C0C0C0"
+                BorderBrush="#808080" BorderThickness="0,1,0,0"
+                Padding="6,2">
+            <StackPanel Orientation="Horizontal">
+                <Border Background="#C0C0C0" BorderBrush="#808080"
+                        BorderThickness="1" Padding="6,1">
+                    <TextBlock x:Name="StatusBarText"
+                               Text="Ready" FontSize="10" Foreground="#000000"/>
+                </Border>
+            </StackPanel>
+        </Border>
+
+    </Grid>
+</Window>

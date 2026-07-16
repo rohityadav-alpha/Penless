@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{72ACF640-2954-406E-8667-594FCD95EB2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Penless.Server", "src\Penless.Server\Penless.Server.csproj", "{28E2CDFB-F8AC-4C40-B908-1B49C38A416B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Penless.Desktop", "src\Penless.Desktop\Penless.Desktop.csproj", "{20979AB2-9572-4C97-A676-4DD36A017150}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{28E2CDFB-F8AC-4C40-B908-1B49C38A416B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28E2CDFB-F8AC-4C40-B908-1B49C38A416B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28E2CDFB-F8AC-4C40-B908-1B49C38A416B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28E2CDFB-F8AC-4C40-B908-1B49C38A416B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20979AB2-9572-4C97-A676-4DD36A017150}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20979AB2-9572-4C97-A676-4DD36A017150}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20979AB2-9572-4C97-A676-4DD36A017150}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20979AB2-9572-4C97-A676-4DD36A017150}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{28E2CDFB-F8AC-4C40-B908-1B49C38A416B} = {72ACF640-2954-406E-8667-594FCD95EB2B}
+		{20979AB2-9572-4C97-A676-4DD36A017150} = {72ACF640-2954-406E-8667-594FCD95EB2B}
+	EndGlobalSection
+EndGlobal

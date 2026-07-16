@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <RootNamespace>Penless.Desktop</RootNamespace>
+    <AssemblyName>Penless</AssemblyName>
+    <Product>Penless</Product>
+    <Description>Local network file transfer — no installs needed on client devices.</Description>
+    <Company>Penless</Company>
+    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Copyright>Copyright © 2026</Copyright>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="app.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Penless.Server\Penless.Server.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="QRCoder" Version="1.6.0" />
+  </ItemGroup>
+
+  <!-- Build output ke liye wwwroot copy -->
+  <Target Name="CopyWwwrootToBin" AfterTargets="Build">
+    <ItemGroup>
+      <WwwrootFiles Include="..\Penless.Server\wwwroot\**\*" />
+    </ItemGroup>
+    <Copy
+      SourceFiles="@(WwwrootFiles)"
+      DestinationFolder="$(OutputPath)wwwroot\%(RecursiveDir)"
+      SkipUnchangedFiles="true" />
+  </Target>
+
+  <!-- Publish output ke liye wwwroot copy -->
+  <Target Name="CopyWwwrootToPublish" AfterTargets="Publish">
+    <ItemGroup>
+      <WwwrootFiles Include="..\Penless.Server\wwwroot\**\*" />
+    </ItemGroup>
+    <Copy
+      SourceFiles="@(WwwrootFiles)"
+      DestinationFolder="$(PublishDir)wwwroot\%(RecursiveDir)"
+      SkipUnchangedFiles="true" />
+  </Target>
+
+</Project>

@@ -1,0 +1,798 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   Penless — Windows 98 / Classic UI Theme
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ─── Design Tokens ──────────────────────────────────────────────────── */
+:root {
+    /* Classic Win98 palette */
+    --win-gray:        #C0C0C0;
+    --win-dark-gray:   #808080;
+    --win-darker-gray: #404040;
+    --win-white:       #FFFFFF;
+    --win-black:       #000000;
+    --win-navy:        #000080;
+    --win-teal:        #008080;
+    --win-green:       #008000;
+    --win-red:         #800000;
+    --win-blue:        #0000FF;
+    --win-silver:      #D4D0C8;
+    --win-title-start: #000080;
+    --win-title-end:   #1084D0;
+
+    /* 3D bevel system */
+    --bevel-light:   #FFFFFF;
+    --bevel-mid:     #C0C0C0;
+    --bevel-shadow:  #808080;
+    --bevel-dark:    #404040;
+
+    /* Raised border: top-left white, bottom-right dark */
+    --border-raised:  1px solid var(--bevel-light);
+    --border-raised2: 1px solid var(--bevel-shadow);
+
+    /* Sunken border: top-left dark, bottom-right white */
+    --border-sunken:  1px solid var(--bevel-shadow);
+    --border-sunken2: 1px solid var(--bevel-light);
+
+    --font-system: "Tahoma", "MS Sans Serif", "Arial", sans-serif;
+    --font-mono:   "Courier New", "Lucida Console", monospace;
+    --font-size:   11px;
+
+    --transition: 0s;
+}
+
+/* ─── Reset & Base ───────────────────────────────────────────────────── */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: var(--font-size);
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: unset;
+    image-rendering: pixelated;
+}
+
+body {
+    font-family: var(--font-system);
+    font-size: var(--font-size);
+    background: var(--win-teal);
+    color: var(--win-black);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ─── Win98 Window Chrome ────────────────────────────────────────────── */
+.container {
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 0 12px;
+}
+
+/* ─── Window Frame ───────────────────────────────────────────────────── */
+.win-window {
+    background: var(--win-gray);
+    border-top: 2px solid var(--bevel-light);
+    border-left: 2px solid var(--bevel-light);
+    border-right: 2px solid var(--bevel-dark);
+    border-bottom: 2px solid var(--bevel-dark);
+    margin-bottom: 12px;
+}
+
+/* ─── Title Bar ──────────────────────────────────────────────────────── */
+.title-bar {
+    background: linear-gradient(90deg, var(--win-title-start) 0%, var(--win-title-end) 100%);
+    color: var(--win-white);
+    font-weight: bold;
+    font-size: var(--font-size);
+    padding: 3px 4px 3px 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+}
+
+.title-bar-text {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.title-icon {
+    font-size: 14px;
+}
+
+.title-bar-controls {
+    display: flex;
+    gap: 2px;
+}
+
+.title-btn {
+    width: 16px;
+    height: 14px;
+    background: var(--win-gray);
+    border-top: 1px solid var(--bevel-light);
+    border-left: 1px solid var(--bevel-light);
+    border-right: 1px solid var(--bevel-dark);
+    border-bottom: 1px solid var(--bevel-dark);
+    font-size: 9px;
+    font-weight: bold;
+    font-family: "Marlett", "Wingdings", var(--font-system);
+    color: var(--win-black);
+    cursor: default;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.title-btn:active {
+    border-top: 1px solid var(--bevel-dark);
+    border-left: 1px solid var(--bevel-dark);
+    border-right: 1px solid var(--bevel-light);
+    border-bottom: 1px solid var(--bevel-light);
+}
+
+/* ─── Window Body ────────────────────────────────────────────────────── */
+.win-body {
+    padding: 10px 12px 12px;
+}
+
+/* ─── Header (app branding replaces the card header) ────────────────── */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--win-gray);
+    border-top: 2px solid var(--bevel-light);
+    border-left: 2px solid var(--bevel-light);
+    border-right: 2px solid var(--bevel-dark);
+    border-bottom: 2px solid var(--bevel-dark);
+    margin-bottom: 8px;
+}
+
+.header-content {
+    background: linear-gradient(90deg, var(--win-title-start), var(--win-title-end));
+    color: white;
+    font-weight: bold;
+    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.logo-icon { font-size: 15px; }
+
+.logo h1 {
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    letter-spacing: 0;
+}
+
+.header-actions { display: flex; align-items: center; gap: 6px; }
+
+/* ─── Status Badge (Win98 indicator style) ───────────────────────────── */
+.status-badge {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 1px 6px;
+    background: var(--win-gray);
+    border-top: 1px solid var(--bevel-shadow);
+    border-left: 1px solid var(--bevel-shadow);
+    border-right: 1px solid var(--bevel-light);
+    border-bottom: 1px solid var(--bevel-light);
+    color: var(--win-black);
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid var(--bevel-dark);
+}
+
+.status-connecting .status-dot { background: #C0C000; }
+.status-connecting { color: var(--win-black); }
+
+.status-connected .status-dot { background: var(--win-green); }
+.status-connected { color: var(--win-black); }
+
+.status-error .status-dot { background: var(--win-red); }
+.status-error { color: var(--win-black); }
+
+/* ─── Cards → Win98 Group Boxes ─────────────────────────────────────── */
+.card {
+    background: var(--win-gray);
+    /* Sunken outer, raised inner = classic group box */
+    border-top: 1px solid var(--bevel-shadow);
+    border-left: 1px solid var(--bevel-shadow);
+    border-right: 1px solid var(--bevel-light);
+    border-bottom: 1px solid var(--bevel-light);
+    padding: 10px 12px 12px;
+    margin: 0 0 10px 0;
+}
+
+.card-compact { padding: 7px 12px; }
+
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--bevel-shadow);
+}
+
+.card-header h2 {
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 0;
+}
+
+.card-header-actions { display: flex; gap: 4px; }
+
+/* ─── Badge (folder label) ───────────────────────────────────────────── */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 1px 6px;
+    font-size: 10px;
+    font-weight: bold;
+    background: var(--win-navy);
+    color: var(--win-white);
+    border: 1px solid var(--bevel-dark);
+}
+
+/* ─── Buttons — Win98 Raised 3D ──────────────────────────────────────── */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 12px 4px;
+    font-family: var(--font-system);
+    font-size: var(--font-size);
+    font-weight: normal;
+    cursor: default;
+    text-decoration: none;
+    white-space: nowrap;
+    color: var(--win-black);
+    background: var(--win-gray);
+    /* Raised bevel */
+    border-top: 2px solid var(--bevel-light);
+    border-left: 2px solid var(--bevel-light);
+    border-right: 2px solid var(--bevel-dark);
+    border-bottom: 2px solid var(--bevel-dark);
+    outline: none;
+    user-select: none;
+    min-width: 75px;
+    justify-content: center;
+}
+
+.btn:hover { background: var(--win-silver); }
+
+.btn:active,
+.btn.pressed {
+    /* Sunken on press */
+    border-top: 2px solid var(--bevel-dark);
+    border-left: 2px solid var(--bevel-dark);
+    border-right: 2px solid var(--bevel-light);
+    border-bottom: 2px solid var(--bevel-light);
+    padding: 4px 11px 3px 13px;
+}
+
+.btn-primary {
+    /* Default button gets a dotted focus ring in Win98 */
+    outline: 1px dotted var(--win-black);
+    outline-offset: -4px;
+}
+
+.btn-ghost {
+    background: var(--win-gray);
+    color: var(--win-black);
+    min-width: unset;
+    padding: 3px 8px 4px;
+}
+
+.btn-sm {
+    padding: 2px 8px 3px;
+    font-size: 10px;
+    min-width: unset;
+}
+
+.btn-full {
+    width: 100%;
+    justify-content: center;
+    margin-top: 6px;
+}
+
+.btn-download {
+    background: var(--win-gray);
+    color: var(--win-black);
+    font-weight: bold;
+    font-size: 10px;
+}
+
+.btn-danger {
+    background: var(--win-gray);
+    color: var(--win-red);
+    font-weight: bold;
+}
+
+.btn:disabled,
+.btn[disabled] {
+    color: var(--bevel-shadow);
+    cursor: default;
+}
+
+/* ─── Input / TextBox — Win98 Sunken ─────────────────────────────────── */
+.input {
+    width: 100%;
+    padding: 3px 5px;
+    background: var(--win-white);
+    font-family: var(--font-system);
+    font-size: var(--font-size);
+    color: var(--win-black);
+    outline: none;
+    /* Sunken bevel */
+    border-top: 2px solid var(--bevel-shadow);
+    border-left: 2px solid var(--bevel-shadow);
+    border-right: 2px solid var(--bevel-light);
+    border-bottom: 2px solid var(--bevel-light);
+}
+
+.input:focus {
+    outline: none;
+    border-top: 2px solid var(--bevel-dark);
+    border-left: 2px solid var(--bevel-dark);
+}
+
+.input::placeholder { color: var(--bevel-shadow); }
+
+/* ─── Drop Zone ──────────────────────────────────────────────────────── */
+.drop-zone {
+    position: relative;
+    /* Sunken panel */
+    border-top: 2px solid var(--bevel-shadow);
+    border-left: 2px solid var(--bevel-shadow);
+    border-right: 2px solid var(--bevel-light);
+    border-bottom: 2px solid var(--bevel-light);
+    padding: 24px 16px;
+    text-align: center;
+    cursor: default;
+    background: var(--win-white);
+}
+
+.drop-zone:hover { background: #F0F0F0; }
+
+.drop-zone.drag-over {
+    background: #D0D8FF;
+    border-color: var(--win-navy);
+}
+
+.drop-zone-icon {
+    color: var(--bevel-shadow);
+    margin-bottom: 8px;
+}
+
+.drop-zone-text {
+    font-size: 11px;
+    font-weight: bold;
+    color: var(--win-black);
+    margin-bottom: 2px;
+}
+
+.drop-zone-hint { font-size: 10px; color: var(--bevel-shadow); }
+
+/* ─── Upload Progress ────────────────────────────────────────────────── */
+.upload-progress {
+    margin-top: 10px;
+    padding: 8px;
+    background: var(--win-gray);
+    border-top: 1px solid var(--bevel-shadow);
+    border-left: 1px solid var(--bevel-shadow);
+    border-right: 1px solid var(--bevel-light);
+    border-bottom: 1px solid var(--bevel-light);
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    margin-bottom: 6px;
+}
+
+/* Win98-style progress bar: blue blocks */
+.progress-bar-track {
+    width: 100%;
+    height: 14px;
+    background: var(--win-white);
+    border-top: 1px solid var(--bevel-shadow);
+    border-left: 1px solid var(--bevel-shadow);
+    border-right: 1px solid var(--bevel-light);
+    border-bottom: 1px solid var(--bevel-light);
+    overflow: hidden;
+    padding: 1px;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--win-navy) 0px,
+        var(--win-navy) 10px,
+        #1084D0 10px,
+        #1084D0 12px
+    );
+    transition: width 0.2s linear;
+}
+
+.upload-results { margin-top: 8px; font-size: 10px; }
+
+.upload-result-item {
+    padding: 3px 0;
+    border-top: 1px solid var(--bevel-shadow);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.upload-result-item:first-child { border-top: none; }
+.upload-result-item .success { color: var(--win-green); font-weight: bold; }
+.upload-result-item .error   { color: var(--win-red);   font-weight: bold; }
+
+/* ─── Breadcrumb ─────────────────────────────────────────────────────── */
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 3px 6px;
+    background: var(--win-white);
+    border-top: 1px solid var(--bevel-shadow);
+    border-left: 1px solid var(--bevel-shadow);
+    border-right: 1px solid var(--bevel-light);
+    border-bottom: 1px solid var(--bevel-light);
+    margin-bottom: 8px;
+    font-size: 10px;
+    overflow-x: auto;
+    flex-wrap: wrap;
+}
+
+.breadcrumb-item {
+    color: var(--win-navy);
+    cursor: default;
+    padding: 1px 3px;
+}
+
+.breadcrumb-item:hover { background: var(--win-navy); color: white; }
+.breadcrumb-item.active { color: var(--win-black); font-weight: bold; cursor: default; }
+.breadcrumb-separator { color: var(--bevel-shadow); font-size: 10px; padding: 0 1px; }
+
+/* ─── New Folder Dialog ──────────────────────────────────────────────── */
+.new-folder-dialog {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 8px;
+    align-items: center;
+}
+
+.new-folder-dialog .input { flex: 1; }
+
+/* ─── File List ──────────────────────────────────────────────────────── */
+.file-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-top: 1px solid var(--bevel-shadow);
+    border-left: 1px solid var(--bevel-shadow);
+    border-right: 1px solid var(--bevel-light);
+    border-bottom: 1px solid var(--bevel-light);
+    background: var(--win-white);
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    cursor: default;
+    border-bottom: 1px solid #E0E0E0;
+    font-size: 10px;
+}
+
+.file-item:last-child { border-bottom: none; }
+.file-item:hover { background: var(--win-navy); color: white; }
+.file-item:hover .file-item-name { color: white; }
+.file-item:hover .file-item-meta { color: #A0C0FF; }
+.file-item:hover .folder-name  { color: white; }
+
+.file-item-icon {
+    font-size: 16px;
+    flex-shrink: 0;
+    width: 20px;
+    text-align: center;
+}
+
+.file-item-info { flex: 1; min-width: 0; }
+
+.file-item-name {
+    font-size: 10px;
+    font-weight: bold;
+    color: var(--win-black);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.file-item-name.folder-name {
+    cursor: default;
+    color: var(--win-black);
+}
+
+.file-item-meta {
+    font-size: 9px;
+    color: var(--bevel-shadow);
+    display: flex;
+    gap: 10px;
+    margin-top: 1px;
+}
+
+.file-item-actions {
+    display: flex;
+    gap: 2px;
+    opacity: 0;
+}
+
+.file-item:hover .file-item-actions { opacity: 1; }
+
+/* When hovered, make action buttons visible in white context */
+.file-item:hover .btn { color: var(--win-black); }
+.file-item:hover .btn-danger { color: var(--win-red); }
+
+.file-list-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 0;
+    color: var(--bevel-shadow);
+    gap: 8px;
+    font-size: 10px;
+    background: var(--win-white);
+}
+
+/* ─── Empty State ────────────────────────────────────────────────────── */
+.empty-state {
+    text-align: center;
+    padding: 30px 20px;
+    background: var(--win-white);
+    border-top: 1px solid var(--bevel-shadow);
+    border-left: 1px solid var(--bevel-shadow);
+    border-right: 1px solid var(--bevel-light);
+    border-bottom: 1px solid var(--bevel-light);
+}
+
+.empty-icon { font-size: 32px; margin-bottom: 8px; opacity: 0.6; }
+
+.empty-state h3 { font-size: 11px; font-weight: bold; margin-bottom: 4px; }
+.empty-state p  { color: var(--bevel-shadow); font-size: 10px; }
+
+/* ─── Server Info Bar ────────────────────────────────────────────────── */
+.server-info {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.info-item { display: flex; flex-direction: column; gap: 1px; }
+
+.info-label {
+    font-size: 9px;
+    font-weight: bold;
+    color: var(--bevel-shadow);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.info-value { font-size: 10px; font-weight: bold; color: var(--win-navy); }
+
+/* ─── Modal → Win98 Dialog ───────────────────────────────────────────── */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-card {
+    background: var(--win-gray);
+    /* Win98 window border */
+    border-top: 2px solid var(--bevel-light);
+    border-left: 2px solid var(--bevel-light);
+    border-right: 2px solid var(--bevel-dark);
+    border-bottom: 2px solid var(--bevel-dark);
+    width: 100%;
+    max-width: 340px;
+    text-align: center;
+}
+
+/* Title bar of the dialog */
+.modal-card::before {
+    content: "🔒  Enter PIN";
+    display: block;
+    background: linear-gradient(90deg, var(--win-navy), #1084D0);
+    color: white;
+    font-weight: bold;
+    font-size: 11px;
+    padding: 3px 6px;
+    text-align: left;
+    margin-bottom: 0;
+}
+
+.modal-inner {
+    padding: 20px 24px 16px;
+}
+
+.modal-icon { font-size: 32px; margin-bottom: 10px; }
+
+.modal-card h2 {
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.modal-card .text-secondary {
+    color: var(--bevel-shadow);
+    font-size: 10px;
+    margin-bottom: 12px;
+}
+
+.modal-card .input {
+    margin-bottom: 8px;
+    text-align: center;
+    font-size: 14px;
+    letter-spacing: 6px;
+}
+
+.error-text {
+    color: var(--win-red);
+    font-size: 10px;
+    margin-bottom: 8px;
+}
+
+/* ─── Spinner → Win98 hourglass emoji ───────────────────────────────── */
+.spinner {
+    font-size: 20px;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+}
+
+.spinner::after { content: "⏳"; }
+
+@keyframes spin {
+    0%   { content: "⏳"; }
+    50%  { content: "⌛"; }
+    100% { content: "⏳"; }
+}
+
+/* ─── Toast Notifications → Win98 Balloon style ──────────────────────── */
+.toast-container {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.toast {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 8px 10px;
+    font-size: 10px;
+    font-family: var(--font-system);
+    background: var(--win-gray);
+    border-top: 2px solid var(--bevel-light);
+    border-left: 2px solid var(--bevel-light);
+    border-right: 2px solid var(--bevel-dark);
+    border-bottom: 2px solid var(--bevel-dark);
+    min-width: 220px;
+    max-width: 340px;
+    animation: slideInRight 0.15s ease;
+}
+
+.toast-success { border-left-color: var(--win-green); }
+.toast-error   { border-left-color: var(--win-red); }
+.toast-info    { border-left-color: var(--win-navy); }
+
+.toast-success span:first-child { color: var(--win-green); font-weight: bold; }
+.toast-error   span:first-child { color: var(--win-red);   font-weight: bold; }
+.toast-info    span:first-child { color: var(--win-navy);  font-weight: bold; }
+
+/* ─── Animations ─────────────────────────────────────────────────────── */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+@keyframes slideInRight {
+    from { transform: translateX(110%); opacity: 0; }
+    to   { transform: translateX(0);    opacity: 1; }
+}
+
+@keyframes slideOut {
+    from { transform: translateX(0);    opacity: 1; }
+    to   { transform: translateX(110%); opacity: 0; }
+}
+
+/* ─── Scrollbar — Win98 style ────────────────────────────────────────── */
+::-webkit-scrollbar { width: 16px; }
+
+::-webkit-scrollbar-track {
+    background: var(--win-gray);
+    border-left: 1px solid var(--bevel-shadow);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--win-gray);
+    border-top: 1px solid var(--bevel-light);
+    border-left: 1px solid var(--bevel-light);
+    border-right: 1px solid var(--bevel-dark);
+    border-bottom: 1px solid var(--bevel-dark);
+    min-height: 20px;
+}
+
+::-webkit-scrollbar-button {
+    background: var(--win-gray);
+    border-top: 1px solid var(--bevel-light);
+    border-left: 1px solid var(--bevel-light);
+    border-right: 1px solid var(--bevel-dark);
+    border-bottom: 1px solid var(--bevel-dark);
+    height: 16px;
+    display: block;
+}
+
+/* ─── Inline Rename ──────────────────────────────────────────────────── */
+.rename-row {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    width: 100%;
+}
+
+.rename-input {
+    flex: 1;
+    padding: 1px 4px;
+    font-size: 10px;
+    height: 20px;
+    min-width: 0;
+}
+
+/* ─── Upload section label ───────────────────────────────────────────── */
+.upload-section {}
+
+/* ─── Responsive ──────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .container { padding: 0 6px; }
+    .card { padding: 8px; }
+    .card-header { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .card-header-actions { width: 100%; }
+    .file-item-actions { opacity: 1; }
+    .drop-zone { padding: 18px 10px; }
+    .server-info { gap: 10px; }
+    .header-content { flex-wrap: wrap; gap: 6px; }
+    .toast { min-width: unset; max-width: calc(100vw - 32px); }
+    .breadcrumb { font-size: 9px; }
+}
