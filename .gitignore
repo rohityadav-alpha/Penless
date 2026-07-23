@@ -1,5 +1,11 @@
-# ── Python version (excluded entirely) ──────────────────────────────────────
-python/
+# ── Python build & cache artifacts ──────────────────────────────────────────
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+python/build/
+python/dist/
 
 # ── .NET build artifacts ─────────────────────────────────────────────────────
 **/bin/
@@ -8,7 +14,7 @@ python/
 # ── Publish output ────────────────────────────────────────────────────────────
 publish/
 
-# ── User-specific Visual Studio / Rider files ────────────────────────────────
+# ── User-specific Visual Studio / Rider / IDE files ───────────────────────────
 .vs/
 *.user
 *.suo
@@ -17,6 +23,7 @@ publish/
 *.sln.docstates
 .idea/
 *.DotSettings.user
+.vscode/
 
 # ── Shared files folder (runtime data, not source) ───────────────────────────
 SharedFiles/
