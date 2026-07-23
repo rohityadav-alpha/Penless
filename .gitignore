@@ -1,11 +1,5 @@
-# ── Python build & cache artifacts ──────────────────────────────────────────
-**/__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.pytest_cache/
-python/build/
-python/dist/
+# ── Python version (excluded entirely from .NET repo) ──────────────────────
+python/
 
 # ── .NET build artifacts ─────────────────────────────────────────────────────
 **/bin/
